@@ -193,6 +193,12 @@ class model:
         pitch = np.arcsin(-vector[2] / dis) - self.Pitch
         return yaw, pitch, dis
 
+    def los2geo(self, yaw, pitch, dis):
+        return self.NED2geo(self.los2NED(yaw, pitch, dis))
+
+    def geo2los(self, lat, lon, alt):
+        return self.NED2los(self.geo2NED(lat, lon, alt))
+
     def find(self, enemy, pos=np.zeros(3)):
         if not pos.any():
             pos = self.geo2NED(enemy.Latitude, enemy.Longitude, enemy.Altitude)

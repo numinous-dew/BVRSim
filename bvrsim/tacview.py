@@ -26,7 +26,7 @@ class tacview:
     def loginit(self, entity: f16 | aim120c, color, name="F-16C", radar=1):
         deg = np.rad2deg(entity.radarAngle)
         self.file.write(
-            f"{entity.ID:X},Color={color},Name={name},RadarMode={radar},RadarAzimuth={deg},RadarElevation={deg},RadarRange={entity.radarR},Radius=5\n"
+            f"{entity.ID:X},Color={color},Name={name},RadarMode={radar},RadarAzimuth={deg},RadarElevation={deg},RadarRange={entity.radarR},Radius=15\n"
         )
 
     def logstep(self, entity: model):

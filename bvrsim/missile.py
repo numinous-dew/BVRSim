@@ -95,14 +95,13 @@ class aim120c(model):
         self.radarR = 2e4
         self.radarAngle = np.deg2rad(20)
         self.TargetID = info.EnemyID
-        self.geo = drone.NED2geo(
-            drone.los2NED(info.TargetYaw, info.TargetPitch, info.TargetDis)
-        )  # 发射时目标经纬高(原点)
+        # 发射时目标经纬高(原点)
+        self.geo = drone.los2geo(info.TargetYaw, info.TargetPitch, info.TargetDis)
         self.data = ()  # 目标最新绝对信息
         self.kalman = Kalman(self.fdm.get_delta_t(), sigma(info.TargetDis))
         self.kalman.X[3:6] = info.vNED  # 速度初始化
-        # 前方10m,避免炸到载机
-        lat, lon, alt = drone.NED2geo(drone.los2NED(0, 0, 10))
+        # 前方20m,避免炸到载机
+        lat, lon, alt = drone.los2geo(0, 0, 20)
         lat, lon, head, pitch = np.rad2deg(
             (lat, lon, drone.Yaw + info.TargetYaw, drone.Pitch)
         )  # 继承载机部分状态

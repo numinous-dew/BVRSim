@@ -131,7 +131,7 @@ class bvrsim:
         return dead
 
     def strike(self):  # 检查是否碰撞
-        grid = spatialgrid(5)
+        grid = spatialgrid(15)
         pos = {}  # 实体绝对坐标
         for ID, (entity, _) in self.entity.items():
             pos[ID] = -model.geo2NED(entity, *self.center)
